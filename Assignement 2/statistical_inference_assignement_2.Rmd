@@ -105,7 +105,7 @@ From the above plot we can determine that there does indeed appear to be an
 advantage of providing orange juice over absorbic acid. However, both supplements 
 fall inline with each other as the dose exceeds 1.0mg, matching up at 2.0mg.  
   
-## Suppliment vs Tooth Growth Testing
+## Supplement vs Tooth Growth Testing
   
 To back these preliminary findings up we will run the ToothData dataset through R's `t.test` function.  
 But first, let's take a quick look whether we need to set the variance argument to TRUE. 
@@ -125,7 +125,7 @@ cat(paste("VC Var:", VC_var))
 Ok so we don't need to be math Gods to figure out that we need to set var.equal to FALSE. 
 Additionally, since we're looking for the probability that H1 mean isn't equal to H0 mean 
 then we need to use a two sided test.  
-Let's move on to spliting the data into OJ and VC variables and then performing the t.test.
+Let's move on to splitting the data into OJ and VC variables and then performing the t.test.
 
 ```{r data prep}
 OJ <- ToothGrowth[ToothGrowth$supp == "OJ", ]
@@ -135,7 +135,7 @@ t.test(OJ$len, VC$len, var.equal = F, alternative = "two.sided")
 
 ```
 
-## Outcome of Suppliment Analysis
+## Outcome of Supplement Analysis
 From the resulting t.test we can see that we have a confidence interval of 
 *-0.1710156 to 7.5710156*. This interval, contains **0**, so we can't rule out the 
 possibility that there is no difference between the means.  
@@ -145,13 +145,13 @@ rejection rate so we **fail to reject H0: Mean tooth growth from OJ administrati
 ## Exploratory Analysis of the Dose Variable
   
 Again, before we delve deep into the analysis, let's set up our hypothesis's.  
-Following on from the first confession of ignorence, I'm coerced to admit that I again 
+Following on from the first confession of ignorance, I'm coerced to admit that I again 
 am clueless in the subject of rodent dentistry, therefore I will set the hypotheses 
 for this inference as follows:
 
-> H0: Mean tooth growth vs Suppliment and Dose  == 0
+> H0: Mean tooth growth vs Supplement and Dose  == 0
 
-> H1: Mean tooth growth vs Suppliment and Dose != 0
+> H1: Mean tooth growth vs Supplement and Dose != 0
   
 
 From the initial plot we can see that there does appear to be a positive linear correlation 
@@ -160,9 +160,9 @@ effect at doses over 1.0mg.  Regardless of any reduced effects, the higher the d
 the largest mean toothgrowth.  
 As is expected, let's back this up with some statistics!
   
-## Suppliment vs Tooth Growth & Dose Testing
+## Supplement vs Tooth Growth & Dose Testing
 
-To being, we will need to subset our data into both suppliments, and all dose levels.  
+To being, we will need to subset our data into both supplements, and all dose levels.  
   
 ```{r doses}
 OJ_0.5 <- ToothGrowth[ToothGrowth$supp == "OJ" & ToothGrowth$dose == 0.5,]
@@ -191,7 +191,7 @@ t.test(OJ_1.0$len, VC_1.0$len, var.equal = FALSE, alternative = "two.sided")
 t.test(OJ_2.0$len, VC_2.0$len, var.equal = FALSE, alternative = "two.sided")
 ```
   
-## Outcome of Suppliment vs Tooth Growth Testing
+## Outcome of Supplement vs Tooth Growth Testing
 Now that we have our test results, let's create a table below to summarise what we've discovered.  
 I will highlight all statistically significant results using a **bold** font. These will be results 
 which either do not contain 0 in the 95% confidence interval, or have a p-value <= the alpha we set 
@@ -203,8 +203,8 @@ at 0.05.
 |P-value | **0.006359** | **0.001038** | 0.9639 |
  
 ## Conclusion
-Whilst we were unable to reject the null hypotheses for analysing suppliment vs tooth growth 
-accross all doses, we were able to find statisticaly significant results for suppliment vs
+Whilst we were unable to reject the null hypotheses for analyzing supplement vs tooth growth 
+across all doses, we were able to find statistical significant results for supplement vs
  tooth growth for doses under 2.0mg.  
-From this, we can conclude that for doses of **under 2.0mg**, providing **OJ** as a suppliment 
+From this, we can conclude that for doses of **under 2.0mg**, providing **OJ** as a supplement 
 will result in increased tooth growth. 
